@@ -1,92 +1,57 @@
 // Get UI
 
-const getbox = document.querySelector('.box'),
-    getbtns = document.querySelector('.btns'),
-    getboxtitle = document.querySelector('#boxtitle');
+const getdivarea = document.querySelector('#divarea');
 
-getbox.addEventListener('click', function (e) {
-    // console.log('hey');
+getdivarea.contentEditable = true;
+getdivarea.spellCheck = false;
 
-    getbtns.classList.add('show');
-    // getbtns.classList.toggle('show');
+const getbtns = document.querySelectorAll('.btn');
 
-    smallmenu(e.target);
+getbtns.forEach(function (getbtn) {
+    // console.log(getbtn);
+
+    getbtn.addEventListener('click', function () {
+        //  Method 1
+        // const getcommand = getbtn.getAttribute('data-command');
+        // console.log(getcommand);
+
+        //  Method 2
+        const getcommand = getbtn.dataset['command'];
+        // console.log(getcommand);
+
+        if (getcommand === 'clearText') {
+            getdivarea.innerHTML = '';
+        } else if (getcommand === 'createLink' || getcommand === 'insertImage') {
+            //                                      command,  defaultvalue
+            const geturl = prompt('Enter your website link', 'https://');
+            document.execCommand(getcommand, false, geturl);
+        } else if (getcommand === 'paste') {
+            navigator.clipboard.readText().then(function (text) {
+                getdivarea.innerHTML += text;
+            });
+        } else if (getcommand === 'foreColor') {
+            document.execCommand(getcommand, false, getbtn.value);
+        } else if (getcommand === 'backColor') {
+            document.execCommand(getcommand, false, getbtn.value);
+        } else if (getcommand === 'fontName') {
+            document.execCommand(getcommand, false, getbtn.value);
+        } else {
+            //                    command,  showui, value
+            document.execCommand(getcommand, false, null);
+        }
+    });
 });
 
-getbox.addEventListener('dblclick', function () {
-    getbtns.classList.remove('show');
-});
-
-function smallmenu(ele) {
-    // console.log(ele);
-
-    if (ele.classList.contains('btn-icon') || ele.classList.contains('icn')) {
-        // console.log('Yes');
-
-        const geturl = ele.getAttribute('data-link');
-        // console.log(geturl);
-        window.location.href = geturl;
-    } else if (ele.classList.contains('icn')) {
-        const geturl = ele.parentElement.getAttribute('data-link');
-        // console.log(geturl);
-        window.location.href = geturl;
-    } else {
-        console.log('No');
-    }
+function lwcasefun() {
+    getdivarea.style.textTransform = 'lowercase';
 }
 
-dragme(getbox);
-
-function dragme(box) {
-    // console.log(box);
-    // console.log('I am main dragme function');
-
-    let getcx, getcy, setcx, setcy;
-
-    if (getboxtitle) {
-        getboxtitle.onmousedown = mousedown;
-    }
-
-    function mousedown(e) {
-        // console.log('I am movedown function');
-
-        getcx = e.clientX;
-        getcy = e.clientY;
-
-        // console.log('Step 1: ', getcx, getcy);
-
-        document.onmousemove = dragnow;
-        document.onmouseup = stopdrag;
-
-        getbtns.classList.remove('show');
-    }
-
-    function dragnow(e) {
-        // console.log('I am dragnow function');
-
-        setcx = getcx - e.clientX;
-        setcy = getcy - e.clientY;
-
-        // console.log('Step 2: ', setcx, setcy);
-
-        getcx = e.clientX; //          reset and override clientX and clientY ,  moved element to the new location
-        getcy = e.clientY;
-
-        const btnleft = box.offsetLeft;
-        const btntop = box.offsetTop;
-
-        // console.log(btnleft, btntop);     //     btn topLeft point
-
-        // console.log(btnleft - setcx, btntop - setcy);
-
-        box.style.left = btnleft - setcx + 'px';
-        box.style.top = btntop - setcy + 'px';
-    }
-
-    function stopdrag() {
-        // console.log('I am stopdrag function');
-
-        document.onmousemove = null;
-        document.onmouseup = null;
-    }
+function capcasefun() {
+    getdivarea.style.textTransform = 'captalize';
 }
+
+function upcasefun() {
+    getdivarea.style.textTransform = 'uppercase';
+}
+
+// 14ex

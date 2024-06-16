@@ -25,9 +25,9 @@
                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Right Text" data-command="justifyRight"><i class="fas fa-align-right"></i></button>
                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Full Text" data-command="justifyFull"><i class="fas fa-align-justify"></i></button>
 
-                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Uppercase">Upper Case</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Lowercase Text">Lower Case</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Capitalize">Capitalize Case</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Uppercase" oncick="upcasefun()">Upper Case</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Lowercase Text" oncick="lwcasefun()">Lower Case</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Capitalize" oncick="capcasefun()">Capitalize Case</button>
 
                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="Subscript Text" data-command="subscript"><i class="fas fa-subscript"></i></button>
                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" title="superscript Text" data-command="superscript"><i class="fas fa-superscript"></i></button>
@@ -85,6 +85,7 @@
                 <div class="col-md-12">
                     <form action="" method="">
                         <div class="form-group">
+                            <!-- <div id="divarea" class="divarea" contenteditable="true" spellcheck='false'></div> -->
                             <div id="divarea" class="divarea"></div>
                         </div>
                         <div class="text-end">
